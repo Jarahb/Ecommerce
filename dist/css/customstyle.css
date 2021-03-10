@@ -1,0 +1,21 @@
+
+form.will-validate.validated-form .invalid-input input, form.will-validate.validated-form .invalid-input .input-group-text {
+    border:none;
+
+}
+
+form.will-validate.validated-form .invalid-input{
+    border: 1px solid #e74a3b;
+    border-radius: .25rem;
+}
+
+form.will-validate.validated-form .invalid-input:focus-within{
+    border-color: #e74a3b;
+    -webkit-box-shadow: 0 0 0 0.2rem #F9D2CE;
+    box-shadow: 0 0 0 0.2rem #F9D2CE;
+}
+
+form.will-validate.validated-form .invalid-input input:focus{
+   border:none;
+
+}

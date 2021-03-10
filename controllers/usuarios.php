@@ -6,11 +6,6 @@
 
 // DataTables PHP library
 include( "../lib/DataTables.php" );
- $host="localhost"; //El servidor que utilizaremos 
- $user="Jara";     //El usuario que tiene todos los permisos en la bbdd
- $pass="123456";    //La contraseña
- $db="ecommerce";  
-
 // Alias Editor classes so they are easy to use
 use
 	DataTables\Editor,
@@ -33,23 +28,23 @@ $editor = Editor::inst( $db, 'usuarios' )
 			->validator( Validate::email( ValidateOptions::inst()
 				->message( 'Debe ingresar un email' )
 				) ),
-		Field::inst( 'teléfono' )
+		Field::inst( 'telï¿½fono' )
 			->validator( Validate::numeric() )
 				->setFormatter( Format::ifEmpty(null) )
 				) ),
-		Field::inst( 'dirección' )
+		Field::inst( 'direcciï¿½n' )
 			->validator( Validate::notEmpty( ValidateOptions::inst()
-				->message( 'Debe ingresar una dirección' )	
+				->message( 'Debe ingresar una direcciï¿½n' )	
 			) ),
-		Field::inst( 'población' )
+		Field::inst( 'poblaciï¿½n' )
 			->validator( Validate::notEmpty( ValidateOptions::inst()
-				->message( 'Debe ingresar la ciudad dónde reside' )	
+				->message( 'Debe ingresar la ciudad dï¿½nde reside' )	
 			) ),
 		Field::inst( 'provincia' )
 			->validator( Validate::notEmpty( ValidateOptions::inst()
 				->message( 'Debe ingresar un nombre' )	
 			) ),
-		Field::inst( 'código postal' )
+		Field::inst( 'cï¿½digo postal' )
 			->validator(  Validate::numeric() )
 				->setFormatter( Format::ifEmpty(null) )		
     )

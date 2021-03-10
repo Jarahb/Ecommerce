@@ -48,7 +48,7 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-                    <!--Creamos formulario de tipo post para enviar los datos del usuario al módulo-->
+                    <!--Creamos formulario de tipo post para enviar los datos del usuario al mÃ³dulo-->
                     <form action="panel.php?modulo=crearadmin" method="post">
                         <div class="form-group">
                             <label>Email</label>
