@@ -1,11 +1,3 @@
-
-<?php
-include_once "dbecommerce.php";
-$con=mysqli_connect($host,$user,$pass,$db);
-?>
-
-
-
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -32,7 +24,7 @@ $con=mysqli_connect($host,$user,$pass,$db);
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Existencias</th>
-                    <th>Imagenes</th>
+                      <th>Imágenes</th>
                   </tr>
                   </thead>
                 </table>

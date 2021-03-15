@@ -1,3 +1,49 @@
+<?php
+
+switch($_SERVER['REQUEST_METHOD']) {
+    case 'GET':
+        $get = true;
+        break;
+
+    case 'POST':
+        $post = true;
+        session_start();
+        include_once "dbecommerce.php";
+        //Recojo datos del formulario
+        $email = filter_var(strtolower(trim($_POST['email'])), FILTER_SANITIZE_EMAIL);
+        $pass = trim($_POST['secreto']);
+
+        $query = "SELECT id, nombre, email, pass from admin where email='" . $email . "'; ";
+        // Comienza transacción
+        $mysqli->begin_transaction();
+        try {
+            // Ejecuta query
+            $result = $mysqli->query($query);
+            $mysqli->commit();
+            $mysqli->close();
+            $row = mysqli_fetch_assoc($result); //Parámetro para obtener el resultado
+            if ($row && password_verify($pass, $row['pass'])) {  //Petición para almacene estos datos de la sesión
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['nombre'] = $row['nombre'];
+                header("location: panel.php");
+            }
+            else{
+                $error=true;
+            }
+
+        } catch (mysqli_sql_exception $exception) {
+            $mysqli->rollback();
+            throw $exception;
+        }
+        break;
+    default:
+        break;
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,80 +65,61 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition login-page">
+<?php if((isset($get) && $get) || (isset($error) && $error)):?>
 <div class="login-box">
-  <div class="login-logo">
-    <a><b>Miss</b>Margott</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Inicie sesión para comenzar a comprar</p>
- <!--   Validamos el inicio de sesión mediante la bbdd-->
-        <?php
-        if(isset($_REQUEST['login'])) { 
-           session_start();
-           $email=$_REQUEST['email']??'';
-           $pasword=$_REQUEST['pass']??'';
-           $pasword=md5($pasword); //Hemos añadido a la contraseña encriptación mediante md5
-           include_once "dbecommerce.php";
-           $con=mysqli_connect($host,$user,$pass,$db);
-           $query ="SELECT id,email,nombre from admin where email='".$email."' and pass='".$pasword."'; ";
-           $res=mysqli_query($con,$query); //Petición de registro
-           $row=mysqli_fetch_assoc($res); //Parámetro para obtener el resultado
-           if ($row){  //Petición para almacene estos datos de la sesión
-              $_SESSION['id']=$row['id'];
-              $_SESSION['email']=$row['email'];
-              $_SESSION['nombre']=$row['nombre'];
-              header("location: panel.php"); 
-            } else {  //Si el registro no es correcto muestra una alerta
-         ?>
+    <div class="login-logo">
+        <a><b>Miss</b>Margott</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card pb-2">
+        <div class="card-body login-card-body">
+            <?php if (isset($error) && $error):?>
                 <div class="alert alert-danger" role="alert">
-                    Error de inicio de sesión. Por favor revise sus datos: email y contraseña
+                    Error de login: usuario y/o contraseña incorrectos.
                 </div>
-            <?php
-             }
-         }    
-            ?>
-      <form method="post">
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="pass">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block" name="login">Acceder</button>
-          </div>
-          <!-- /.col -->
-        </div>
-        </div>
-      </form>
-      <!-- /.social-auth-links -->
+            <?php endif;?>
+            <p class="login-box-msg">Inicia sesión para comenzar a comprar</p>
 
-      <p class="mb-1">
-        <a href="forgot-password.html">Ups.Olvidé mi contraseña</a>
-      </p>
-      <p class="mb-0">
-        <a href="registro.php" class="text-center">Registrar un nuevo socio</a>
-      </p>
+            <form method="post">
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email" name="email" value="">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Password" name="secreto" value="">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-4 offset-4">
+                        <button type="submit" class="btn btn-primary btn-block" name="login">Acceder</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+
+        <!-- /.social-auth-links -->
+
+        <p class="text-center mb-1">
+            <a href="#">Olvidé mi contraseña</a>
+        </p>
+        <p class="text-center mb-0">
+            <a href="registro.php" class="text-center">¿No eres usuario aún? Regístrate aquí</a>
+        </p>
     </div>
     <!-- /.login-card-body -->
-  </div>
 </div>
 <!-- /.login-box -->
-
+<?php endif;?>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 

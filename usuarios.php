@@ -1,3 +1,8 @@
+<?php
+$query ="SELECT email, nombre, telefono, direccion, poblacion, provincia, codigopostal FROM usuarios;";
+$r = $mysqli->query($query);
+$usuarios = $r->fetch_all(MYSQLI_ASSOC);
+?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -23,33 +28,27 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Nombre</th>
                     <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Poblacion</th>
+                    <th>Nombre</th>
+                    <th>Tel√©fono</th>
+                    <th>Direcci√≥n</th>
+                    <th>Poblaci√≥n</th>
                     <th>Provincia</th>
-                    <th>Codigo postal</th>  
+                    <th>C√≥digo Postal</th>
                   </tr>
                   </thead>
                   <tbody>
-                   <?php
-                      
-                      $query ="SELECT id,email,nombre, from admin ";
-                      $res=mysqli_query($con,$query); //PeticiÛn de registro
-
-                      while($row = mysqli_fetch_assoc($res)){ //Mientras el row contenga registros va a hacer:
-                      ?>
+                  <?php foreach ($usuarios as $usuario): ?>
                   <tr>
-                    <td><?php echo $row['nombre'] ?></td>
-                    <td><?php echo $row['email'] ?></td>7
-                    <td><?php echo $row['telÈfono'] ?></td>
-                    <td><?php echo $row['poblaciÛn'] ?></td>
-                    <td><?php echo $row['provincia'] ?></td>
-                    <td><?php echo $row['cÛdigo postal'] ?></td>
+                      <td><?= $usuario['email']; ?></td>
+                      <td><?= $usuario['nombre']; ?></td>
+                      <td><?= ($usuario['telefono'] == 0) ? '-' : $usuario['telefono'];?></td>
+                      <td><?= $usuario['direccion']; ?></td>
+                      <td><?= $usuario['poblacion']; ?></td>
+                      <td><?= $usuario['provincia']; ?></td>
+                      <td><?= $usuario['codigopostal']; ?></td>
                   </tr>
-                  <?php
-                  }
-                  ?>
+                  <?php endforeach;?>
                   </tbody>
                 </table>
               </div>

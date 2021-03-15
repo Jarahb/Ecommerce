@@ -1,7 +1,13 @@
-<!--Datos de conexión de la base de datos-->
+
 <?php
-    $host="localhost"; //El servidor que utilizaremos 
-    $user="Jara";     //El usuario que tiene todos los permisos en la bbdd
-    $pass="123456";    //La contraseña
-    $db="ecommerce";  //El nombre de la bbdd
+
+/* Datos de conexiÃ³n a bd */
+$host = "localhost"; //El servidor que utilizaremos
+$user = "Jara";//"Jara";     //El usuario que tiene todos los permisos en la bbdd
+$pass = "123456";//"123456";    //La contraseÃ±a
+$db = "ecommerce";  //El nombre de la bbdd
+
+/* configuro conexiÃ³n */
+$mysqli = new mysqli($host, $user, $pass, $db);
+$mysqli->set_charset('utf8');
 ?>

@@ -1,18 +1,20 @@
+<!--Para que nadie pueda entrar al Panel sin loguearse-->
+<?php
+session_start();
+session_regenerate_id(true); //Voy a añadir seguridad para no almacenar sesiones y actualizarlas
+if(isset($_REQUEST['sesion']) && $_REQUEST['sesion']=="cerrar"){
+    session_destroy();
+    header("location: index.php");
+}
+if( isset($_SESSION['id'])==false ){
+    header("location: index.php");
+}
+$modulo=$_REQUEST['modulo']?? '';
+include_once "dbecommerce.php";
+?>
+
 <!DOCTYPE html>
 <html>
-<!--Para que nadie pueda entrar al Panel sin loguearse-->
-    <?php
-        session_start();
-        session_regenerate_id(true); //Voy a añadir seguridad para no almacenar sesiones y actualizarlas
-        if(isset($_REQUEST['sesion']) && $_REQUEST['sesion']=="cerrar"){
-            session_destroy();
-            header("location: index.php");
-        }
-        if( isset($_SESSION['id'])==false ){
-            header("location: index.php");
-        }
-        $modulo=$_REQUEST['modulo']?? '';
-    ?>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -220,20 +222,33 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script>
-    $(function () {
-        $("#example1").DataTable();
-        $("#example2").DataTable({
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
 
+<script>
+
+    /* Scripts datatables */
+
+
+    const langSettings = {
+        "zeroRecords": "No se encontraron resultados.",
+        "info": "Mostrando _START_ al _END_ de _TOTAL_ entradas.",
+        "infoEmpty": "No se mostraron registros",
+        "infoFiltered": " (filtrados de un total de  _MAX_ registros)",
+        "lengthMenu": " Mostrar _MENU_ registros.",
+        "search": "Buscar",
+        "paginate": {
+            "previous": "Anterior",
+            "next": "Siguiente"
+        }
+    };
+
+    $(document).ready(function () {
+        $("#example1").DataTable({
+            language:langSettings
+        });
+        $("#example2").DataTable({
+            language:langSettings
         });
     });
-</script>
-
-<script>
 
 
   var editor;
@@ -251,7 +266,8 @@
             }, {
                 label: "Existencias:",
                 name: "existencias"
-            }, {
+            },
+            {
                 label: "Imágenes:", //Para que me permita subir múltiples imágenes de productos
                 name: "files[].id",
                 type: "uploadMany",
@@ -260,37 +276,41 @@
                 },
                 noFileText: 'No hay imágenes'
             }
+
             ]
 
     } );
- 
-   var table = $('#tablaproductos').DataTable( {
+
+   $('#tablaproductos').DataTable( {
         dom: "Bfrtip",
         ajax: "controllers/productos.php",
+       language:langSettings,
         columns: [
             { data: "nombre" },
-            { data: "precio", render: $.fn.dataTable.render.number(',', '.', 0, '$') },
+            { data: "precio", render: $.fn.dataTable.render.number(',', '.', 2, '€') },
             { data: "existencias" },
             {
-                data: "files",        
+                data: "files",
                 render: function ( d ) {
                     return d.length ?
-                        d.length+' image(nes)' :   //Muestra la cantidad de imágenes que subimos
-                        'No hay imagen(es)';
+                        d.length+' imáge(nes)' :   //Muestra la cantidad de imágenes que subimos
+                        'No hay imágen(es)';
                 },
-                title: "Imagenes"
+                title: "Imágenes"
             }
         ],
         select: true,
         buttons: [
-            { extend: 'create', text:"New",  editor: editor },
-            { extend: 'edit',  text:"Edit", editor: editor },
-            { extend: 'remove', text:"Delete", editor: editor }
+            { extend: 'create', text:"Nuevo",  editor: editor },
+            { extend: 'edit',  text:"Editar", editor: editor },
+            { extend: 'remove', text:"Eliminar", editor: editor }
         ]
     } );
+
   });
  </script>
- <script>  
+ <script>
+     /*
    var editor;
 
     $(document).ready(function() {
@@ -319,7 +339,7 @@
         ]
 
     } );
- 
+
     var table = $('#tablausuarios').DataTable( {
          dom: "Bfrtip",
         ajax: "controllers/usuarios.php",
@@ -339,6 +359,7 @@
          ]
      } );
  });
+ */
 </script>
      <script>
          $(document).ready(function () {

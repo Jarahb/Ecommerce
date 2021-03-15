@@ -6,10 +6,6 @@
 
 // DataTables PHP library
 include( "../lib/DataTables.php" );
- $host="localhost"; //El servidor que utilizaremos 
- $user="Jara";     //El usuario que tiene todos los permisos en la bbdd
- $pass="123456";    //La contraseña
- $db="ecommerce";  
 
 // Alias Editor classes so they are easy to use
 use
@@ -23,26 +19,27 @@ use
 	DataTables\Editor\ValidateOptions;
 
 // Build our Editor instance and process the data coming from _POST
-$editor = Editor::inst( $db, 'productos' )
+
+Editor::inst( $db, 'productos' )
 	->fields(
 		Field::inst( 'nombre' )
 			->validator( Validate::notEmpty( ValidateOptions::inst()
-				->message( 'Debe ingresar un nombre' )	
-			) ),
+            ->message( 'Debe ingresar un nombre' )
+        ) ),
 		Field::inst( 'precio' )
 			->validator( Validate::numeric() )
-				->setFormatter( Format::ifEmpty(null) ),
+            ->setFormatter( Format::ifEmpty(null) ),
 		Field::inst( 'existencias' )
-			->validator( Validate::numeric() )
-				->setFormatter( Format::ifEmpty(null) )
+            ->validator( Validate::numeric() )
+            ->setFormatter( Format::ifEmpty(null) )
 	)
 	->join(
         Mjoin::inst( 'files' )
             ->link( 'productos.id', 'productos_files.producto_id' )
-            ->link( 'files.id', 'productos_files.files_id' )
+            ->link( 'files.id', 'productos_files.file_id' )
             ->fields(
                 Field::inst( 'id' ) //De esta forma se suben los archivos
-                    ->upload( Upload::inst( $_SERVER['DOCUMENT_ROOT'].'xampp/Ecommerce/upload/__ID__.__EXTN__' )
+                    ->upload( Upload::inst( $_SERVER['DOCUMENT_ROOT'].'/Ecommerce/upload/__ID__.__EXTN__' )
                         ->db( 'files', 'id', array(
                             'filename'    => Upload::DB_FILE_NAME,
                             'filesize'    => Upload::DB_FILE_SIZE,
@@ -54,6 +51,7 @@ $editor = Editor::inst( $db, 'productos' )
                     )
             )
     )
+	->debug(true)
 	->process( $_POST )
 	->json();
 ?>
