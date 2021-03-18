@@ -66355,8 +66355,8 @@ Editor.defaults = {
 			 *        
 			 */
 			"confirm": {
-				"_": "Are you sure you wish to delete %d rows?",
-				"1": "Are you sure you wish to delete 1 row?"
+				"_": "Está seguro de eliminar %d filas?",
+                "1": "Está seguro de eliminar 1 fila?"
 			}
 		},
 
