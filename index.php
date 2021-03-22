@@ -20,8 +20,9 @@ switch($_SERVER['REQUEST_METHOD']) {
             $_SESSION['nombre'] =  $email;
             header("location: panel.php");
         }
+      */
 
-        break; */
+        break;
 
     case 'POST':
         $post = true;

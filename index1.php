@@ -1,3 +1,45 @@
+<?php
+include_once "dbecommerce.php";
+
+$where="WHERE 1=1 ";
+$nombre=$mysqli->real_escape_string($_REQUEST['nombre']??'');
+if( empty($nombre)==false){
+    $where="and nombre like '%".$nombre."%'";
+}
+
+//Creo un paginador para los resultados de búsqueda de la consulta
+$queryCuenta="SELECT COUNT(*) as cuenta FROM productos $where;";
+$totalRegistros = mysqli_fetch_assoc($mysqli->query($queryCuenta))['cuenta'];
+
+//Elementos que me va a mostrar por página
+$elementosPorPagina=12;
+$totalPaginas=ceil($totalRegistros/$elementosPorPagina);
+//Paginación:Si no hay ninguna pag seleccionada me seleccionará por defecto la 1
+$paginaSel=$_REQUEST['pagina']??false;
+if($paginaSel==false){
+    $inicioLimite=0;
+    $paginaSel=1;
+} else{
+    $inicioLimite=($paginaSel-1)* $elementosPorPagina;
+}
+$limite="LIMIT $inicioLimite, $elementosPorPagina ";
+$query="SELECT
+                    p.id,
+                    p.nombre,
+                    p.precio,
+                    p.existencias,
+                    f.web_path
+                    FROM
+                    productos AS p
+                    INNER JOIN productos_files AS pf ON pf.producto_id=p.id
+                    INNER JOIN files AS f ON f.id=pf.file_id
+                    $where
+                    GROUP BY p.id
+                    $limite
+                    ;";
+$r=$mysqli->query($query);
+$infoProducto = $r->fetch_all(MYSQLI_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,62 +179,21 @@
       <!-- /.navbar -->
        <div class="row mt-1"> 
            <!--Consulta para que muestre sólo una imagen x producto en el index-->
-            <?php
-                include_once "dbecommerce.php";
-                $con=mysqli_connect($host,$user,$pass,$db);
-                $where="where 1=1 ";
-                $nombre=mysqli_real_escape_string($con,$_REQUEST['nombre']??'');
-                if( empty($nombre)==false){
-                    $where="and nombre like '%".$nombre."%'";
-                }
-                //Creo un paginador para los resultados de búsqueda de la consulta
-                $queryCuenta="SELECT COUNT(*) as cuenta FROM productos $where ;";
-                $resCuenta=mysqli_query($con,$queryCuenta);
-                $rowCuenta=mysqli_fetch_assoc($resCuenta);
-                $totalRegistros=$rowCuenta['cuenta'];
-                //Elementos que me va a mostrar por página
-                $elementosPorPagina=12;
-                $totalPaginas=ceil($totalRegistros/$elementosPorPagina);
-                //Paginación:Si no hay ninguna pag seleccionada me seleccionará por defecto la 1
-                $paginaSel=$_REQUEST['pagina']??false;
-                if($paginaSel==false){
-                    $inicioLimite=0;
-                    $paginaSel=1;
-                } else{
-                    $inicioLimite=($paginaSel-1)* $elementosPorPagina;
-                }
-                $limite=" limit$inicioLimite,$elementosPorPagina ";
-                $query="SELECT
-                    p.id,
-                    p.nombre,
-                    p.precio,
-                    p.existencias,
-                    f.web_path
-                    FROM
-                    productos AS p
-                    INNER JOIN productos_files AS pf ON pf.producto_id=p.id
-                    INNER JOIN files AS f ON f.id=pf.file_id
-                    $where
-                    GROUP BY p.id
-                    $limite
-                    ";
-                $res=mysqli_query($con, $query);
-                while($row = mysqli_fetch_assoc($res)){
-                ?>
+            <?php foreach ($infoProducto as $producto):?>
                    <div class="col-lg-4 col-md-6 col-sm-12">
                        <div class="card border-primary">
-                           <img class="card-img-top img-thumbnail" src="<?php echo $row['web_path'] ?>" alt="">
-                           <div class="card-body">
-                               <h2 class="card-title"><strong><?php echo $row['nombre'] ?></strong></h2>
-                               <p class="card-text"><strong>Precio: </strong><?php echo $row['precio'] ?></p>
-                               <p class="card-text"><strong>Existencias: </strong><?php echo $row['existencias'] ?></p>
-                               <a href="#" class="btn btn-primary">Ver</a>
+                           <img class="card-img-top img-thumbnail" src="<?=$producto['web_path'] ?>" alt="">
+                           <div class="card-body text-center">
+                               <h2 class="card-title w-100 border-bottom border-primary pb-2"><strong class="text-primary"><?=$producto['nombre'] ?></strong></h2>
+                               <div class="row d-flex align-items-center justify-content-around p-2">
+                                   <span><strong>Precio: </strong><?=$producto['precio']?></span>
+                                   <span><strong>Existencias: </strong><?=$producto['existencias']?></span>
+                               </div>
+                               <a href="#" class="btn btn-primary btn-sm">Ver</a>
                            </div>
                        </div>
                    </div>
-                <?php
-                }
-                ?>
+               <?php endforeach;?>
        </div>
         <!--Paginador:Creo los botones del paginador-->
         <?php
