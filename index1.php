@@ -1,10 +1,10 @@
 <?php
 include_once "dbecommerce.php";
 
-$where="WHERE 1=1 ";
+$where="WHERE 1=1";
 $nombre=$mysqli->real_escape_string($_REQUEST['nombre']??'');
 if( empty($nombre)==false){
-    $where="and nombre like '%".$nombre."%'";
+    $where="WHERE nombre like '%".$nombre."%'";
 }
 
 //Creo un paginador para los resultados de búsqueda de la consulta
