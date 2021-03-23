@@ -19,3 +19,8 @@ form.will-validate.validated-form .invalid-input input:focus{
    border:none;
 
 }
+
+.img-thumbnail.lista-productos {
+    object-fit:contain;
+    height:300px;
+}

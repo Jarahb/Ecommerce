@@ -3,7 +3,7 @@
 switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         $get = true;
-
+        break;
 
     case 'POST':
         $post = true;
