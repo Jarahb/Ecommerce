@@ -4,25 +4,6 @@ switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         $get = true;
 
-      /*  $DEBUG=false;
-
-         if ($DEBUG){
-            session_start();
-            include_once "dbecommerce.php";
-            $email = "jaruky22@hotmail.com";
-            $query = "SELECT id, nombre WHERE email='jaruky22@hotmail.com'";
-            $result = $mysqli->query($query);
-            $mysqli->commit();
-            $mysqli->close();
-            $row = mysqli_fetch_assoc($result); //Parámetro para obtener el resultado
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['nombre'] =  $email;
-            header("location: panel.php");
-        }
-      */
-
-        break;
 
     case 'POST':
         $post = true;
