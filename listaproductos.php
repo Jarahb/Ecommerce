@@ -7,9 +7,8 @@
                 <div class="card-body text-center">
                     <h2 class="card-title w-100 border-bottom border-primary pb-2"><strong
                                 class="text-primary"><?= $producto['nombre'] ?></strong></h2>
-                    <div class="row d-flex align-items-center justify-content-around p-2">
-                        <span><strong>Precio: </strong><?= numfmt_format_currency($fmt,  $producto['precio'], "EUR")."\n"; ?></span>
-                        <span><strong>Existencias: </strong><?= $producto['existencias'] ?></span>
+                    <div class="row d-flex align-items-center justify-content-around p-2 mb-2">
+                        <span><strong><?= numfmt_format_currency($fmt,  $producto['precio'], "EUR")."\n"; ?></span></strong>
                     </div>
                     <a href="index1.php?modulo=detalleproducto&id=<?=$producto['id'] ?>"
                        class="btn btn-primary btn-sm">Ver</a>

@@ -1,6 +1,7 @@
 <?php
 include_once "dbecommerce.php";
-$con = mysqli_connect($host, $user, $pass, $db);
+include_once "helpers/helpers.php";
+
 $where = "WHERE 1=1";
 $nombre = $mysqli->real_escape_string($_REQUEST['nombre'] ?? '');
 if (empty($nombre) == false) {
@@ -27,7 +28,6 @@ $query = "SELECT
 p.id,
 p.nombre,
 p.precio,
-p.existencias,
 f.web_path
 FROM
 productos AS p
@@ -35,6 +35,7 @@ INNER JOIN productos_files AS pf ON pf.producto_id=p.id
 INNER JOIN files AS f ON f.id=pf.file_id
 $where
 GROUP BY p.id
+ORDER BY p.nombre ASC
 $limite
 ;";
 $r = $mysqli->query($query);
