@@ -60,7 +60,7 @@ $row=mysqli_fetch_assoc($res);
                             <input type="email" name="email" class="form-control" value="<?php echo $row['email']?>" required="required">
                         </div>
                         <div class="form-group">
-                            <label>Pass</label>
+                            <label>Contrasena</label>
                             <input type="password" name="pass" class="form-control" required="required">
                         </div>
                         <div class="form-group">

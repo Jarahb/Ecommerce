@@ -7,6 +7,8 @@
 // DataTables PHP library
 include( "../lib/DataTables.php" );
 
+$ids_to_delete = [];
+
 // Alias Editor classes so they are easy to use
 use
 	DataTables\Editor,
@@ -49,7 +51,7 @@ Editor::inst( $db, 'productos' )
                         'system_path' => Upload::DB_SYSTEM_PATH
                     ) )
                     ->validator( Validate::fileSize( 5000000, 'El archivo debe ser menor a 5M' ) )
-                    ->validator( Validate::fileExtensions( array( 'png', 'jpg', 'jpeg', 'gif' ), "Por favor carga una imagen" ) )
+                    ->validator( Validate::fileExtensions( array( 'png', 'jpg', 'jpeg', 'gif', 'webp' ), "Por favor carga una imagen" ) )
                 )
             )
     )
@@ -82,6 +84,40 @@ Editor::inst( $db, 'productos' )
             }
 		}
 	})
+    ->on('preRemove',function($editor,$id,$values){
+    	/*justo antes de borrar, recupero los id de imagen asociados al producto
+    	para poder borrarlos despues en el postRemove si fue bien el borrado del producto.
+    	*/
+    	global $ids_to_delete;
+
+    	$res = $editor->db()->select('productos_files','file_id', function($q) use ($id) {
+            $q->where('producto_id', $id, '=' );
+        })->fetchAll();
+
+    	$ids_to_delete = $res;
+    	//$results =  print_r($ids_to_delete, true);
+        //file_put_contents('filename.txt', $results);
+
+    })
+    ->on('postRemove',function($editor,$id,$values){
+        // Borro las imagenes asociadas al producto eliminado, tanto de la bd como de uploads
+        global $ids_to_delete;
+
+        foreach ($ids_to_delete as $id_key){
+
+            $path_imagen = $editor->db()->select('files','system_path', function($q) use ($id_key) {
+                $q->where('id', $id_key['file_id'], '=' );
+            })->fetchAll()[0]['system_path'];
+
+            //borro imagen
+			unlink($path_imagen);
+
+			//Ahora borro su entrada de la base de datos.
+            $editor->db()->delete('files', function($q) use ($id_key) {
+                $q->where('id', $id_key['file_id'], '=' );
+            });
+		}
+    })
 	->debug(true)
 	->process( $_POST )
 	->json();

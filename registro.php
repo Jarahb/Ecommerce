@@ -261,7 +261,7 @@ switch($_SERVER['REQUEST_METHOD'])
 
             <?php elseif(isset($post) && $post && isset($error) && !$error):?>
                     <div class="alert alert-info text-center" role="alert">
-                        Registro completado con éxito. Pincha <a href="index.php">aquí</a> para acceder al login.
+                        Registro completado con éxito. Pincha <a href="login.php">aquí</a> para acceder al login.
                     </div>
             <?php endif;?>
         </div>

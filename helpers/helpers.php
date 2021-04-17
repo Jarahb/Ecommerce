@@ -29,7 +29,10 @@ $colorOptions = [
     ["label"=>"Amarillo", "name" =>"amarillo"],
     ["label"=>"Verde", "name" =>"verde"],
     ["label"=>"Gris", "name" =>"gris"],
-    ["label"=>"Rojo", "name" =>"rojo"]
+    ["label"=>"Rojo", "name" =>"rojo"],
+    ["label"=>"Nude", "name" =>"nude"]
+
+
 
 ];
 $num_opciones_tallas = 6;
@@ -61,7 +64,8 @@ function colorToHexMapper($colorname){
         "amarillo" => "#FFC107",
         "verde" => "#28A745",
         "gris" => "#6C757D",
-        "rojo" => "#DC3545"
+        "rojo" => "#DC3545",
+        "nude" => "#E7D6C4"
     ];
 
     //mapea color, si no existe default a negro

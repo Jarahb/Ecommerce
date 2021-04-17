@@ -4,10 +4,10 @@ session_start();
 session_regenerate_id(true); //Voy a añadir seguridad para no almacenar sesiones y actualizarlas
 if (isset($_REQUEST['sesion']) && $_REQUEST['sesion'] == "cerrar") {
     session_destroy();
-    header("location: index.php");
+    header("location: login.php");
 }
 if (isset($_SESSION['id']) == false) {
-    header("location: index.php");
+    header("location: login.php");
 }
 $modulo = $_REQUEST['modulo'] ?? '';
 include_once "dbecommerce.php";
@@ -62,6 +62,7 @@ include_once 'helpers/helpers.php';
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
+        </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
@@ -131,8 +132,8 @@ include_once 'helpers/helpers.php';
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="panel.php?modulo=productos"
-                                   class="nav-link <?php echo ($modulo == "productos") ? " active " : " "; ?>">
+                                <a href="panel.php?modulo=productos1"
+                                   class="nav-link <?php echo ($modulo == "productos1") ? " active " : " "; ?>">
                                     <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
                                     <p>Productos</p>
                                 </a>
@@ -170,8 +171,8 @@ include_once 'helpers/helpers.php';
     if ($modulo == "admin") {
         include_once "admin.php";
     }
-    if ($modulo == "productos") {
-        include_once "productos.php";
+    if ($modulo == "productos1") {
+        include_once "productos1.php";
     }
     if ($modulo == "usuarios") {
         include_once "usuarios.php";
@@ -322,10 +323,6 @@ include_once 'helpers/helpers.php';
             ]
         });
 
-        /*$( '<button>Test</button>' ).insertAfter(
-            editor.field( 'existencias' ).input()
-        ); */
-
         return editor;
     });
 
@@ -361,63 +358,8 @@ include_once 'helpers/helpers.php';
         }
     }
 
-
-
-
-
-
 </script>
 <script>
-    /*
-    var editor;
-
-    $(document).ready(function() {
-    editor = new $.fn.dataTable.Editor( {
-    ajax: "controllers/usuarios.php",
-    table: "#tablausuarios",
-    fields: [{
-    label: "Nombre:",
-    name: "nombre"
-    }, {
-    label: "Email:",
-    name: "email"
-    }, {
-    label: "Teléfono:",
-    name: "teléfono"
-    }, {
-    label: "Dirección:",
-    name: "dirección"
-    }, {
-    label: "Población",
-    name: "pobación"
-    }, {
-    label: "Provincia",
-    name: "provincia"
-    }
-    ]
-
-    } );
-
-    var table = $('#tablausuarios').DataTable( {
-    dom: "Bfrtip",
-    ajax: "controllers/usuarios.php",
-    columns: [
-    { data: "nombre" },
-    { data: "email" },
-    { data: "teléfono" },
-    { data: "dirección" },
-    { data: "población" },
-    { data: "provincia" }
-    ],
-    select: false,
-    buttons: [
-    { extend: 'create', text:"New",  editor: editor },
-    { extend: 'edit',  text:"Edit", editor: editor },
-    { extend: 'remove', text:"Delete", editor: editor }
-    ]
-    } );
-    });
-    */
 </script>
 <script>
     $(document).ready(function () {

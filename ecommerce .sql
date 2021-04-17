@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 06, 2021 at 01:20 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.1.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 16-04-2021 a las 11:09:47
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecommerce`
+-- Base de datos: `ecommerce`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Estructura de tabla para la tabla `admin`
 --
 
 CREATE TABLE `admin` (
@@ -36,7 +36,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin`
+-- Volcado de datos para la tabla `admin`
 --
 
 INSERT INTO `admin` (`id`, `nombre`, `email`, `pass`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `admin` (`id`, `nombre`, `email`, `pass`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clientes`
+-- Estructura de tabla para la tabla `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -58,7 +58,7 @@ CREATE TABLE `clientes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detalleventas`
+-- Estructura de tabla para la tabla `detalleventas`
 --
 
 CREATE TABLE `detalleventas` (
@@ -73,7 +73,7 @@ CREATE TABLE `detalleventas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `existencias`
+-- Estructura de tabla para la tabla `existencias`
 --
 
 CREATE TABLE `existencias` (
@@ -84,7 +84,7 @@ CREATE TABLE `existencias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
--- Dumping data for table `existencias`
+-- Volcado de datos para la tabla `existencias`
 --
 
 INSERT INTO `existencias` (`id`, `grupocolores_id`, `existencias`, `talla`) VALUES
@@ -119,12 +119,21 @@ INSERT INTO `existencias` (`id`, `grupocolores_id`, `existencias`, `talla`) VALU
 (33, 31, 3, '40'),
 (34, 31, 7, '39'),
 (35, 32, 2, '48'),
-(36, 32, 7, '42');
+(36, 32, 7, '42'),
+(37, 33, 11, 'S'),
+(38, 33, 28, 'M'),
+(39, 33, 11, 'L'),
+(40, 34, 8, 'S'),
+(41, 34, 17, 'M'),
+(42, 34, 8, 'L'),
+(43, 35, 22, 'XS'),
+(44, 35, 16, 'S'),
+(45, 35, 16, 'M');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `files`
+-- Estructura de tabla para la tabla `files`
 --
 
 CREATE TABLE `files` (
@@ -136,7 +145,7 @@ CREATE TABLE `files` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `files`
+-- Volcado de datos para la tabla `files`
 --
 
 INSERT INTO `files` (`id`, `filename`, `filesize`, `web_path`, `system_path`) VALUES
@@ -189,12 +198,31 @@ INSERT INTO `files` (`id`, `filename`, `filesize`, `web_path`, `system_path`) VA
 (51, 'fujirojo.jpg', 54206, '/Ecommerce/upload/51.jpg', 'C:/xampp/htdocs/Ecommerce/upload/51.jpg'),
 (52, 'fujiazul.jpg', 219609, '/Ecommerce/upload/52.jpg', 'C:/xampp/htdocs/Ecommerce/upload/52.jpg'),
 (53, 'fujiverde.jpg', 112341, '/Ecommerce/upload/53.jpg', 'C:/xampp/htdocs/Ecommerce/upload/53.jpg'),
-(54, 'fujinegro.jpg', 79527, '/Ecommerce/upload/54.jpg', 'C:/xampp/htdocs/Ecommerce/upload/54.jpg');
+(54, 'fujinegro.jpg', 79527, '/Ecommerce/upload/54.jpg', 'C:/xampp/htdocs/Ecommerce/upload/54.jpg'),
+(55, 'crop top encaje.webp', 5158, '/Ecommerce/upload/55.webp', 'C:/xampp/htdocs/Ecommerce/upload/55.webp'),
+(56, 'crop top encaje 2.webp', 4598, '/Ecommerce/upload/56.webp', 'C:/xampp/htdocs/Ecommerce/upload/56.webp'),
+(57, 'crop top encaje backt.webp', 3602, '/Ecommerce/upload/57.webp', 'C:/xampp/htdocs/Ecommerce/upload/57.webp'),
+(58, 'crop top encaje tela.webp', 1932, '/Ecommerce/upload/58.webp', 'C:/xampp/htdocs/Ecommerce/upload/58.webp'),
+(59, 'corpiño gris 2.jpg', 10828, '/Ecommerce/upload/59.jpg', 'C:/xampp/htdocs/Ecommerce/upload/59.jpg'),
+(60, 'corpiño gris 1.jpg', 13958, '/Ecommerce/upload/60.jpg', 'C:/xampp/htdocs/Ecommerce/upload/60.jpg'),
+(61, 'corpiño gris 3t.jpg', 8405, '/Ecommerce/upload/61.jpg', 'C:/xampp/htdocs/Ecommerce/upload/61.jpg'),
+(62, 'corpiño gris 4.jpg', 14471, '/Ecommerce/upload/62.jpg', 'C:/xampp/htdocs/Ecommerce/upload/62.jpg'),
+(63, 'top multi.jpg', 12446, '/Ecommerce/upload/63.jpg', 'C:/xampp/htdocs/Ecommerce/upload/63.jpg'),
+(64, 'top multi 2.jpg', 10390, '/Ecommerce/upload/64.jpg', 'C:/xampp/htdocs/Ecommerce/upload/64.jpg'),
+(65, 'top multi 3.jpg', 8698, '/Ecommerce/upload/65.jpg', 'C:/xampp/htdocs/Ecommerce/upload/65.jpg'),
+(66, 'top multi 4.jpg', 6597, '/Ecommerce/upload/66.jpg', 'C:/xampp/htdocs/Ecommerce/upload/66.jpg'),
+(67, 'top multi.jpg', 12446, '/Ecommerce/upload/67.jpg', 'C:/xampp/htdocs/Ecommerce/upload/67.jpg'),
+(68, 'top multi 2.jpg', 10390, '/Ecommerce/upload/68.jpg', 'C:/xampp/htdocs/Ecommerce/upload/68.jpg'),
+(69, 'top multi 3.jpg', 8698, '/Ecommerce/upload/69.jpg', 'C:/xampp/htdocs/Ecommerce/upload/69.jpg'),
+(70, 'top multi 4.jpg', 6597, '/Ecommerce/upload/70.jpg', 'C:/xampp/htdocs/Ecommerce/upload/70.jpg'),
+(71, 'top multi 3.jpg', 8698, '/Ecommerce/upload/71.jpg', 'C:/xampp/htdocs/Ecommerce/upload/71.jpg'),
+(72, 'top multi 4.jpg', 6597, '/Ecommerce/upload/72.jpg', 'C:/xampp/htdocs/Ecommerce/upload/72.jpg'),
+(73, 'top multi.jpg', 12446, '/Ecommerce/upload/73.jpg', 'C:/xampp/htdocs/Ecommerce/upload/73.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `grupocolores`
+-- Estructura de tabla para la tabla `grupocolores`
 --
 
 CREATE TABLE `grupocolores` (
@@ -204,7 +232,7 @@ CREATE TABLE `grupocolores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
--- Dumping data for table `grupocolores`
+-- Volcado de datos para la tabla `grupocolores`
 --
 
 INSERT INTO `grupocolores` (`id`, `producto_id`, `color`) VALUES
@@ -222,12 +250,15 @@ INSERT INTO `grupocolores` (`id`, `producto_id`, `color`) VALUES
 (29, 76, 'rojo'),
 (30, 76, 'azul'),
 (31, 76, 'verde'),
-(32, 76, 'negro');
+(32, 76, 'negro'),
+(33, 77, 'blanco'),
+(34, 77, 'gris'),
+(35, 78, 'nude');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos`
+-- Estructura de tabla para la tabla `productos`
 --
 
 CREATE TABLE `productos` (
@@ -238,37 +269,24 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `productos`
+-- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `descripcion`) VALUES
-(4, 'vestido rosa manga asimétrica ocasión', 45, ''),
-(5, 'Vestido azul manga asimétrica ocasión', 45, ''),
-(6, 'Conjunto floral rosa Hawai', 45, ''),
-(7, 'Crop top camisero Bella', 17, ''),
-(8, 'Mini vestido ISABELLA', 40, ''),
-(9, 'Vestido halter de flores 80\'s', 36, ''),
-(10, 'Vestido citricos', 19.5, ''),
-(11, 'Vestido blanco midi dress ', 58, ''),
-(12, 'Vestido camisero nudo', 58, ''),
-(13, 'Vestido mini chicle Claudia', 30, ''),
-(14, 'Vestido blazer blanco', 50, ''),
-(15, 'Vestido mini tachuelas blanco', 45, ''),
-(16, 'Vestido topitos manga asimétrica', 22, ''),
-(17, 'Mono Formentera', 33.99, ''),
-(18, 'Sudadera seven wonders', 24.5, ''),
 (68, 'Mono de esquí', 120, 'mono de esquí nice'),
 (70, 'Cami verano', 15.5, 'jejejeje'),
 (71, 'Chandal guay', 45, 'pppp'),
 (72, 'Prenda test', 20.05, 'prendaste'),
 (73, 'Bufanda chachi', 12.43, 'popopopo'),
 (75, 'Vestido de prueba', 45.99, 'vestido con el que estoy probando el desarrollo'),
-(76, 'Asics Gel Fujitrabucco 7', 120, 'Las deportivas de los verdaderos runners. Siente el máximo confort con sus plantillas de espuma ergonómica.');
+(76, 'Asics Gel Fujitrabucco 7', 120, 'Las deportivas de los verdaderos runners. Siente el máximo confort con sus plantillas de espuma ergonómica.'),
+(77, 'Corpiño de encaje', 25, 'Chic femenino. Dale estilo a nuestro corpiño de encaje con tus Levi\'s vintage favoritos o para una noche de chicas con un total look de sandalias de tacón. Este corpiño de encaje presenta todos los detalles que desea en un top;  es elegante y sexy.'),
+(78, 'Top multi posición nude', 18.99, 'Envuélvalo, anúlelo, átelo. Este top multi posición puede colocarse y atarse como usted desee.\n-Suave, suave y elástico\n-96% algodón / 4% elastano\n-Lavado a mano en frío / plancha caliente\n-Consulte la imagen de muestra de tela para obtener el color más preciso');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos_files`
+-- Estructura de tabla para la tabla `productos_files`
 --
 
 CREATE TABLE `productos_files` (
@@ -277,30 +295,10 @@ CREATE TABLE `productos_files` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `productos_files`
+-- Volcado de datos para la tabla `productos_files`
 --
 
 INSERT INTO `productos_files` (`producto_id`, `file_id`) VALUES
-(5, 16),
-(4, 15),
-(6, 17),
-(7, 18),
-(8, 19),
-(9, 20),
-(10, 21),
-(10, 22),
-(11, 23),
-(11, 24),
-(12, 25),
-(13, 26),
-(13, 27),
-(14, 29),
-(14, 30),
-(15, 32),
-(16, 34),
-(16, 35),
-(17, 37),
-(17, 38),
 (18, 39),
 (18, 40),
 (74, 43),
@@ -311,12 +309,24 @@ INSERT INTO `productos_files` (`producto_id`, `file_id`) VALUES
 (76, 51),
 (76, 52),
 (76, 53),
-(76, 54);
+(76, 54),
+(77, 55),
+(77, 56),
+(77, 57),
+(77, 58),
+(77, 59),
+(77, 60),
+(77, 61),
+(77, 62),
+(78, 67),
+(78, 68),
+(78, 69),
+(78, 70);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos_groups`
+-- Estructura de tabla para la tabla `productos_groups`
 --
 
 CREATE TABLE `productos_groups` (
@@ -327,7 +337,7 @@ CREATE TABLE `productos_groups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -342,7 +352,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`email`, `pass`, `nombre`, `telefono`, `direccion`, `poblacion`, `provincia`, `codigopostal`) VALUES
@@ -351,7 +361,7 @@ INSERT INTO `usuarios` (`email`, `pass`, `nombre`, `telefono`, `direccion`, `pob
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ventas`
+-- Estructura de tabla para la tabla `ventas`
 --
 
 CREATE TABLE `ventas` (
@@ -361,23 +371,23 @@ CREATE TABLE `ventas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `admin`
+-- Indices de la tabla `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `clientes`
+-- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `detalleventas`
+-- Indices de la tabla `detalleventas`
 --
 ALTER TABLE `detalleventas`
   ADD PRIMARY KEY (`id`),
@@ -385,121 +395,121 @@ ALTER TABLE `detalleventas`
   ADD KEY `fkidVenta` (`idVenta`);
 
 --
--- Indexes for table `existencias`
+-- Indices de la tabla `existencias`
 --
 ALTER TABLE `existencias`
   ADD PRIMARY KEY (`id`),
   ADD KEY `grupocolores_id` (`grupocolores_id`);
 
 --
--- Indexes for table `files`
+-- Indices de la tabla `files`
 --
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `grupocolores`
+-- Indices de la tabla `grupocolores`
 --
 ALTER TABLE `grupocolores`
   ADD PRIMARY KEY (`id`),
   ADD KEY `producto_id` (`producto_id`);
 
 --
--- Indexes for table `productos`
+-- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `ventas`
+-- Indices de la tabla `ventas`
 --
 ALTER TABLE `ventas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fkidCliente` (`idCliente`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT de la tabla `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `clientes`
+-- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `detalleventas`
+-- AUTO_INCREMENT de la tabla `detalleventas`
 --
 ALTER TABLE `detalleventas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `existencias`
+-- AUTO_INCREMENT de la tabla `existencias`
 --
 ALTER TABLE `existencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `files`
+-- AUTO_INCREMENT de la tabla `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
--- AUTO_INCREMENT for table `grupocolores`
+-- AUTO_INCREMENT de la tabla `grupocolores`
 --
 ALTER TABLE `grupocolores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT for table `productos`
+-- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
--- AUTO_INCREMENT for table `ventas`
+-- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `detalleventas`
+-- Filtros para la tabla `detalleventas`
 --
 ALTER TABLE `detalleventas`
   ADD CONSTRAINT `idProd` FOREIGN KEY (`idProd`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `idVenta` FOREIGN KEY (`idVenta`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `existencias`
+-- Filtros para la tabla `existencias`
 --
 ALTER TABLE `existencias`
   ADD CONSTRAINT `existencias_ibfk_1` FOREIGN KEY (`grupocolores_id`) REFERENCES `grupocolores` (`id`);
 
 --
--- Constraints for table `grupocolores`
+-- Filtros para la tabla `grupocolores`
 --
 ALTER TABLE `grupocolores`
   ADD CONSTRAINT `grupocolores_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`);
 
 --
--- Constraints for table `ventas`
+-- Filtros para la tabla `ventas`
 --
 ALTER TABLE `ventas`
   ADD CONSTRAINT `idCliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

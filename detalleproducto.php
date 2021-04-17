@@ -178,12 +178,25 @@ foreach($colores_disponibles as $cd){
                         <?=numfmt_format_currency($fmt,  $infoProducto['precio'], "EUR")."\n"; ?>
                     </h2>
                 </div>
-
+                <!--Añadimos combobox para añadir la cantidad de productos-->
                 <div class="mt-4">
-                    <div class="btn btn-primary btn-lg btn-flat">
+                    Cantidad
+                    <input type="number" class="form-control" id="cantidadProducto" >
+                </div>
+                <!--Configuramos el carrito-->
+                <div class="mt-4">
+                    <button class="btn btn-primary btn-lg btn-flat" id="agregarCarrito"
+                    data-id="<?=$id?>"
+                    data-nombre="<?=$infoProducto['nombre']?>"
+                    data-web_path="<?=$imagenes[0]['web_path']?>" 
+                    data-precio="<?=$infoProducto['precio']?>"
+                    data-color="<?=$color['color']?>"
+                    data-talla="<?=$talla['talla']?>"
+                    >
+
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                        Comprar
-                    </div>
+                        Añadir
+                    </button>
                 </div>
 
                 <div class="mt-4 product-share">
@@ -207,9 +220,9 @@ foreach($colores_disponibles as $cd){
             <nav class="w-100">
                 <div class="nav nav-tabs" id="product-tab" role="tablist">
                     <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc"
-                       role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+                       role="tab" aria-controls="product-desc" aria-selected="true">Descripción</a>
                     <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments"
-                       role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
+                       role="tab" aria-controls="product-comments" aria-selected="false">Commentarios</a>
                     <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating"
                        role="tab" aria-controls="product-rating" aria-selected="false">Rating</a>
                 </div>
