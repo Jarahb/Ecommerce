@@ -17,7 +17,7 @@ $talla = $_POST['talla'];
 
 if (count($productos) > 0) {
 
-    foreach ($productos as $prod) {
+    foreach ($productos as $index => $prod) {
 
         //Miro a ver si el producto que añadí está ya en el carrito
         // Si es el mismo producto, pero distinta talla y/o color, entonces lo añado.

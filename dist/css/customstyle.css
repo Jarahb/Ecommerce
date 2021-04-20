@@ -147,3 +147,9 @@ label.no-stock:hover{
 .product-image-thumb:hover{
     cursor:pointer;
 }
+
+/* Shopping Cart */
+
+i.borrarProducto{
+    cursor:pointer;
+}

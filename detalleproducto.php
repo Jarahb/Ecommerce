@@ -181,7 +181,7 @@ foreach($colores_disponibles as $cd){
                 <!--Añadimos combobox para añadir la cantidad de productos-->
                 <div class="mt-4">
                     Cantidad
-                    <input type="number" class="form-control" id="cantidadProducto" >
+                    <input type="number" min="0" class="form-control" id="cantidadProducto" value="1" >
                 </div>
                 <!--Configuramos el carrito-->
                 <div class="mt-4">
@@ -189,10 +189,7 @@ foreach($colores_disponibles as $cd){
                     data-id="<?=$id?>"
                     data-nombre="<?=$infoProducto['nombre']?>"
                     data-web_path="<?=$imagenes[0]['web_path']?>" 
-                    data-precio="<?=$infoProducto['precio']?>"
-                    data-color="<?=$color['color']?>"
-                    data-talla="<?=$talla['talla']?>"
-                    >
+                    data-precio="<?=$infoProducto['precio']?>">
 
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                         Añadir

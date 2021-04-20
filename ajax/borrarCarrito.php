@@ -6,6 +6,6 @@
 
 $productos_vacio = json_encode([]);
 setcookie("productos", $productos_vacio);
-echo $productos_json;
+echo $productos_vacio;
 
 ?>
